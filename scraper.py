@@ -15,7 +15,7 @@ def scrape_table(parameter_a):
         if table_cells: 
             record['School name'] = table_cells[0].text_content()
         if table_cells2:
-            record['School URN'] = table_cells2[0].text_content()
+            record['School URN'] = table_cells2[0].text_content().split(":")[-1].strip()
         # Print out the data we've gathered
         print record, '------------'
         # Finally, save the record to the datastore - 'School name' is our unique key
@@ -40,5 +40,5 @@ def scrape_and_look_for_next_link(parameter_b):
 # call a function to scrape the first page in the series.
 # ---------------------------------------------------------------------------
 
-starting_url = 'https://reports.ofsted.gov.uk/search?q=&location=&radius=&level_2_types%5B%5D=2&latest_report_date_start=&latest_report_date_end=&region%5B%5D=E12000007&status%5B%5D=1&level_1_types=1'
+starting_url = 'https://reports.ofsted.gov.uk/search?q=&location=&radius=&level_2_types%5B0%5D=2&region%5B0%5D=E12000007&status%5B0%5D=1&level_1_types=1&rows=886'
 scrape_and_look_for_next_link(starting_url)
