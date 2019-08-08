@@ -44,5 +44,5 @@ starting_url = 'https://reports.ofsted.gov.uk/search?q=&location=&radius=&level_
 i = 0
 while i < 800:
     url = starting_url + str(i) + '&rows=100'
-    scrape(url)
+    scrape_and_look_for_next_link(url)
     i += 100
