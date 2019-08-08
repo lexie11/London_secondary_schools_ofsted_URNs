@@ -4,7 +4,7 @@ import lxml.html
 
 # scrape_table function: gets passed an individual page to scrape
 def scrape_table(parameter_a):
-    rows = parameter_a.cssselect("ul.results-list.list-unstyled li")  # selects all <li> blocks within <ul class="results-list list-unstyled"> and puts in list variable 'rows'
+    rows = parameter_a.cssselect("li.search-result")  # selects all <li> blocks within <ul class="results-list list-unstyled"> and puts in list variable 'rows'
 #     My guess is it knows to make a list variable because either 'cssselect' function has that written in or it does it automatically because there are multiple table rows
     print rows
     for row in rows:
@@ -40,5 +40,9 @@ def scrape_and_look_for_next_link(parameter_b):
 # call a function to scrape the first page in the series.
 # ---------------------------------------------------------------------------
 
-starting_url = 'https://reports.ofsted.gov.uk/search?q=&location=&radius=&level_2_types%5B0%5D=2&region%5B0%5D=E12000007&status%5B0%5D=1&level_1_types=1&rows=887'
-scrape_and_look_for_next_link(starting_url)
+starting_url = 'https://reports.ofsted.gov.uk/search?q=&location=&radius=&level_2_types%5B0%5D=2&region%5B0%5D=E12000007&status%5B0%5D=1&level_1_types=1&start='
+i = 0
+while i < 800:
+    url = starting_url + str(i) + '&rows=100'
+    scrape(url)
+    i += 100
